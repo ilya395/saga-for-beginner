@@ -5,5 +5,5 @@ export default ({posts}) => {
     if (!posts.length) {
         return <p className="text-center">Пока нет</p>
     }
-    return posts.map(post => <Post post={post} key={post} />)
+    return posts.map(post => <Post post={post} key={post.id} />)
 }
