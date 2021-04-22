@@ -6,14 +6,14 @@ import { REQUESTS_POSTS } from '../store/actions/actionTypes';
 
 function* fetchPosts() {
     try {
-        yield put(waitPostAction());
+        yield put(waitPostAction()); // тут меняется состояние на ожидание
         // достань данные
-        const posts = yield call(() => {
+        const posts = yield call(() => { 
             return fetch(URL_TO_DB)
                     .then(res => res.json())
         });
         // положи в стайт
-        yield put(addPostsAction(posts));
+        yield put(addPostsAction(posts)); // тут меняется состояние на отрисовку
         // yield console.log(posts)
     } catch(e) {
         // ошибки покажи
