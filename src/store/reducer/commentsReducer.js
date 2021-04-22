@@ -10,6 +10,7 @@ export const commentsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_COMMENTS:
             return {
+                ...state,
                 comments: [...action.payload],
                 error: false,
                 wait: false

@@ -13,9 +13,7 @@ function App(props) {
 
   const { posts } = syncPosts;
 
-  const { fetchedPosts, wait } = asyncPosts;
-
-  const { comments } = asyncComments
+  const { wait } = asyncPosts;
 
   // console.log(props);
 
@@ -23,26 +21,26 @@ function App(props) {
     <div className="container pt-3">
 
       <div className="row">
-        <div className="col">
+        <div className="col pb-3">
           <PostForm />
         </div>
       </div>
 
       <div className="row"> 
-        <div className="col">
+        <div className="col col-md-6 pb-3">
           <h2>Синхронные посты</h2>
           <Posts posts={posts} />
         </div>
-        <div className="col">
+        <div className="col col-md-6 pb-3">
           <h2>Асинхронные посты{ wait === true ? ` - Загружаем...` : '' }</h2>
-          <FetchedPosts posts={fetchedPosts} />
+          <FetchedPosts />
         </div>
       </div>
 
       <div className="row">
-        <div className="col">
+        <div className="col col-md-6 pb-3">
           <h2>Асинхронные комменты</h2>
-          <FetchComments comments={comments} />
+          <FetchComments />
         </div>
       </div>
     </div>
