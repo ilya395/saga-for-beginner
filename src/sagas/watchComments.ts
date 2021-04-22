@@ -3,7 +3,7 @@ import { URL_TO_COMMENTS } from '../constants';
 import { addCommentsAction, errorCommnetsAction, waitCommentsAction } from '../store/actions';
 import { REQUEST_COMMENTS } from '../store/actions/actionTypes';
 
-function* fetchComments() {
+function* fetchComments(): Generator<{}, void, object[]> {
     try {
         yield put(waitCommentsAction());
         const comments = yield call(() => {

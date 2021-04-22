@@ -1,4 +1,5 @@
 import { ADD_POST } from '../actions/actionTypes';
+import { ICommentsOpPostsAction } from '../../interfaces';
 
 const initialState = {
     posts: [
@@ -17,7 +18,7 @@ const initialState = {
     ],
 }
 
-export const postReducer = (state = initialState, action) => {
+export const postReducer = (state = initialState, action: ICommentsOpPostsAction) => {
     switch (action.type) {
         case ADD_POST:
             return {

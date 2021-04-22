@@ -1,7 +1,13 @@
 import React from 'react';
 
-export class Comment extends React.Component {
-    constructor(props) {
+interface ICommentProps {
+    comment: {
+        name: string;
+    }
+}
+
+export class Comment extends React.Component<ICommentProps> {
+    constructor(props: ICommentProps) {
         super(props)
     }
 

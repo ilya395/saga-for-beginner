@@ -1,12 +1,14 @@
 import { ADD_COMMENTS, WAIT_COMMENTS, ERROR_COMMENTS } from '../actions/actionTypes';
 
+import { ICommentsOpPostsAction } from '../../interfaces';
+
 const initialState = {
     comments: [],
     error: false,
     wait: false,
 }
 
-export const commentsReducer = (state = initialState, action) => {
+export const commentsReducer = (state = initialState, action: ICommentsOpPostsAction) => {
     switch (action.type) {
         case ADD_COMMENTS:
             return {

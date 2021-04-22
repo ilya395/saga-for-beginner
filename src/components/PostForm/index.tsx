@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { Component, MouseEvent } from 'react';
 
 import { connect } from 'react-redux';
 import { addPostAction } from '../../store/actions';
 
+interface IData {
+    title: string;
+    id: number;
+}
+
+interface IPostFormProps {
+    addPost: void
+}
+
 // export default class PostForm extends React.Component {
 class PostForm extends React.Component {    
-    constructor(props) {
+    constructor(props: IPostFormProps) {
         super(props)
 
         this.state = {
@@ -21,12 +30,12 @@ class PostForm extends React.Component {
     //     console.log(this.props)
     // }
 
-    submitHandler = event => {
+    submitHandler = (event: React.FormEvent<HTMLInputElement>): void => {
         event.preventDefault();
 
         const { addPost } = this.props;
 
-        console.log(this.props)
+        // console.log(this.props)
 
         const { title } = this.state;
 
@@ -42,10 +51,13 @@ class PostForm extends React.Component {
         });
     }
 
-    changeInputHandler = event => {
+    changeInputHandler = (event: React.FormEvent<HTMLInputElement>) => { // React.FormEvent<HTMLInputElement>
         // event.persist();
+
+        const target = event.currentTarget; // event.target;
+
         this.setState(prev => ({...prev, ...{ 
-            [event.target.name]: event.target.value
+            [target.name]: target.value
         }}))
     }
 
@@ -77,7 +89,7 @@ class PostForm extends React.Component {
 //     return state;
 // }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
         addPost: (object) => dispatch(addPostAction(object)),
     }

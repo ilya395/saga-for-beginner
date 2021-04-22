@@ -8,7 +8,25 @@ import { connect } from 'react-redux';
 // import { fetchHelper } from './helpers';
 // import { URL_TO_DB } from './constants';
 
-function App(props) {
+interface IAppProps {
+  syncPosts: {
+    error: boolean,
+    wait: boolean,
+    posts: []
+  }, 
+  asyncPosts: {
+    error: boolean,
+    wait: boolean,
+    fetchedPosts: []
+  }, 
+  asyncComments: {
+    error: boolean,
+    wait: boolean,
+    comments: []
+  }
+}
+
+function App(props: IAppProps) {
   const { syncPosts, asyncPosts, asyncComments } = props;
 
   const { posts } = syncPosts;
@@ -29,7 +47,7 @@ function App(props) {
       <div className="row"> 
         <div className="col col-md-6 pb-3">
           <h2>Синхронные посты</h2>
-          <Posts posts={posts} />
+          <Posts />
         </div>
         <div className="col col-md-6 pb-3">
           <h2>Асинхронные посты{ wait === true ? ` - Загружаем...` : '' }</h2>
@@ -47,7 +65,7 @@ function App(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: IAppProps) => {
   return state;
 }
 

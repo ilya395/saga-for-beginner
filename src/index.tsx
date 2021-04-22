@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; // { render }
+import ReactDOM from 'react-dom'; // вооще-то можно брать только { render }
 
 import { Provider } from 'react-redux';
 

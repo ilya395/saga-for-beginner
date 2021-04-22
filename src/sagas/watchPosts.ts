@@ -4,7 +4,7 @@ import { URL_TO_DB } from '../constants';
 import { waitPostAction, addPostsAction, errorPostsAction } from '../store/actions/index'
 import { REQUESTS_POSTS } from '../store/actions/actionTypes';
 
-function* fetchPosts() {
+function* fetchPosts(): Generator<{}, void, object[]> {
     try {
         yield put(waitPostAction()); // тут меняется состояние на ожидание
         // достань данные

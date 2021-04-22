@@ -14,7 +14,7 @@ import {
 // action creators
 
 // post
-export const addPostAction = (payload) => {
+export const addPostAction = (payload: object) => {
     return {
         type: ADD_POST,
         payload,
@@ -22,7 +22,7 @@ export const addPostAction = (payload) => {
 }
 
 // posts
-export const addPostsAction = (payload) => {
+export const addPostsAction = (payload: object[]) => {
     return {
         type: ADD_POSTS,
         payload,
@@ -48,7 +48,7 @@ export const requestPostsAction = () => {
 }
 
 // comments
-export const addCommentsAction = (payload) => {
+export const addCommentsAction = (payload: object[]) => {
     return {
         type: ADD_COMMENTS,
         payload

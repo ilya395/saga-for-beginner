@@ -11,11 +11,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import { requestPostsAction } from '../../store/actions';
 import { Spiner } from '../Spinner';
 
+interface IFetchPosts {
+    title: string;
+    id: number;
+}
+
+interface IState {
+    asyncPosts: {
+        fetchedPosts: IFetchPosts[]; 
+        wait: boolean;
+        error: boolean;
+    }
+}
+
 const FetchedPosts = () => {
 
     const dispatch = useDispatch();
 
-    const state = useSelector(state => state.asyncPosts);
+    const state = useSelector((state: IState) => state.asyncPosts);
     const { fetchedPosts: posts, wait, error } = state;
     // console.log(state)
 

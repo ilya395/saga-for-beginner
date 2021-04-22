@@ -1,4 +1,5 @@
 import { ADD_POSTS, ERROR_DOWNLOAD_POSTS, WAIT_POSTS } from '../actions/actionTypes';
+import { ICommentsOpPostsAction } from '../../interfaces';
 
 export const initialState = {
     fetchedPosts: [],
@@ -6,7 +7,7 @@ export const initialState = {
     wait: false
 }
 
-export const postsReducer = (state = initialState, action) =>  {
+export const postsReducer = (state = initialState, action: ICommentsOpPostsAction) =>  {
 
     switch (action.type) {
         case ERROR_DOWNLOAD_POSTS:
