@@ -1,31 +1,49 @@
 import React from 'react';
 
-export default class PostForm extends React.Component {
+import { connect } from 'react-redux';
+import { addPostAction } from '../../store/actions';
+
+// export default class PostForm extends React.Component {
+class PostForm extends React.Component {    
     constructor(props) {
         super(props)
 
         this.state = {
-            title: ''
+            title: '',
         }
     }
 
+    // componentDidMount = () => {
+    //     console.log(this.props)
+    // }
+
+    // componentDidUpdate =() => {
+    //     console.log(this.props)
+    // }
+
     submitHandler = event => {
         event.preventDefault();
+
+        const { addPost } = this.props;
+
+        console.log(this.props)
 
         const { title } = this.state;
 
         const newPost = {
             title,
-            id: Date.now().toString()
+            id: Date.now(), // Date.now().toString()
         }
 
+        addPost(newPost);
+
         this.setState({
-            title: ''
+            title: '',
         });
     }
 
     changeInputHandler = event => {
-        event.persist();
+        // event.persist();
         this.setState(prev => ({...prev, ...{ 
             [event.target.name]: event.target.value
         }}))
@@ -54,3 +72,15 @@ export default class PostForm extends React.Component {
         );
     }
 }
+
+// const mapStateToProps = (state) => {
+//     return state;
+// }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: (object) => dispatch(addPostAction(object)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(PostForm);
