@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ICommentProps {
     comment: {
-        name: string;
+        title: string;
     }
 }
 
@@ -17,7 +17,7 @@ export class Comment extends React.Component<ICommentProps> {
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">
-                        {comment.name}
+                        {comment.title}
                     </h5>
                 </div>
             </div>

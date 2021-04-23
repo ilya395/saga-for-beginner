@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, ReactElement } from 'react';
 import Post from '../Post';
 
 // import { downloadPostActionsOldVariant } from '../../store/actions';
@@ -24,7 +24,9 @@ interface IState {
     }
 }
 
-const FetchedPosts = () => {
+type IFetchedPostsProps = {}
+
+const FetchedPosts: FC<IFetchedPostsProps> = () => {
 
     const dispatch = useDispatch();
 
@@ -37,13 +39,8 @@ const FetchedPosts = () => {
     const fetchingPosts = () => {
         console.log('load')
 
-        // fetchHelper({dispatch, url: URL_TO_DB});
         dispatch(requestPostsAction());
     }
-
-    // useEffect(() => {
-    //     console.log(posts);
-    // }, [posts]);
 
     if (wait) {
         return <Spiner />
@@ -56,7 +53,14 @@ const FetchedPosts = () => {
     if (!posts.length) {
         return <button className="btn btn-primary" onClick={fetchingPosts}>Загрузить</button>
     }
-    return posts.map(post => <Post post={post} key={post.id} />)
+
+    return (
+        <>
+            {
+                posts.map((post) => <Post post={post} key={post.id} />)
+            }
+        </>
+    )
 }
 
 export default FetchedPosts;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Comment } from '../Comment';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { requestCommentsAction } from '../../store/actions';
 import { Spiner } from '../Spinner';
@@ -63,7 +64,13 @@ const mapStateToProps = (state: IState) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+// interface IMapState<T> {
+//     addComment: () => T
+// }
+
+// type TMapState = IMapState<() => void>
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         addComments: () => dispatch(requestCommentsAction()),
     }

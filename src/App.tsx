@@ -3,7 +3,12 @@ import Posts from './components/Posts';
 import FetchedPosts from './components/FetchedPosts';
 import FetchComments from './components/FetchComments';
 
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import Widget from './components/Widget';
+import { useEffect } from 'react';
+import { moveModal, openModal } from './store/actions';
+import { Action, AnyAction, Dispatch } from 'redux';
+import { MOVE_MODAL } from './store/actions/actionTypes';
 
 // import { fetchHelper } from './helpers';
 // import { URL_TO_DB } from './constants';
@@ -23,20 +28,40 @@ interface IAppProps {
     error: boolean,
     wait: boolean,
     comments: []
-  }
+  },
+  modal: {
+    modal: boolean
+  },
+  openModalPlz: () => () => void
 }
 
 function App(props: IAppProps) {
   const { syncPosts, asyncPosts, asyncComments } = props;
 
-  const { posts } = syncPosts;
+  // const { posts } = syncPosts;
 
   const { wait } = asyncPosts;
 
-  // console.log(props);
+  console.log(props);
+
+  // const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('!')
+    const { openModalPlz } = props;
+    openModalPlz();
+  }, []);
 
   return (
     <div className="container pt-3">
+
+      {/* {
+        props.modal.modal === true 
+          ? <Widget />
+          : <></>
+      } */}
+
+      <Widget />
 
       <div className="row">
         <div className="col pb-3">
@@ -69,4 +94,10 @@ const mapStateToProps = (state: IAppProps) => {
   return state;
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    openModalPlz: () => dispatch({ type: MOVE_MODAL })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

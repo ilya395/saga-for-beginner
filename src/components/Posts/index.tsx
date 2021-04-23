@@ -8,7 +8,6 @@ interface IPostsProps {
 }
 
 const Posts: FC<IPostsProps> = (props): ReactElement => {
-    console.log(props)
     const { posts } = props;
     if (!posts.length) {
         return <p className="text-center">Пока нет</p>
@@ -29,7 +28,6 @@ interface IState {
 }
 
 const mapStateToProps = (state: IState) => {
-    console.log(state)
     return {
         posts: state.syncPosts.posts,
         // error: state.asyncComments.error,

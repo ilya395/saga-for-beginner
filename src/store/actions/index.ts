@@ -7,9 +7,13 @@ import {
     ADD_COMMENTS, 
     ERROR_COMMENTS, 
     WAIT_COMMENTS,
-    REQUEST_COMMENTS
+    REQUEST_COMMENTS,
+    OPEN_MODAL,
+    CLOSE_MODAL,
+    MOVE_MODAL
 } from './actionTypes';
 // import { URL_TO_DB } from '../../constants';
+import { Dispatch } from 'redux';
 
 // action creators
 
@@ -88,3 +92,23 @@ export const requestCommentsAction = () => {
 //             .catch(e => dispatch( errorPostsAction( e ) ) )
 //     }
 // }
+
+export const openModal = () => {
+    return {
+        type: OPEN_MODAL
+    }
+}
+
+export const closeModal = () => {
+    return {
+        type: CLOSE_MODAL
+    }
+}
+
+export const moveModal = () => {
+    return (dispatch: Dispatch) => {
+        setTimeout(() => {
+            dispatch(openModal());
+        }, 5000);
+    }
+}

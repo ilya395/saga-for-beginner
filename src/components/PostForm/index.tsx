@@ -1,6 +1,7 @@
 import React, { Component, MouseEvent } from 'react';
 
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import { addPostAction } from '../../store/actions';
 
 interface IData {
@@ -9,11 +10,15 @@ interface IData {
 }
 
 interface IPostFormProps {
-    addPost: void
+    addPost: (arg: IData) => void
+}
+
+interface IPostFormState {
+    title: string,
 }
 
 // export default class PostForm extends React.Component {
-class PostForm extends React.Component {    
+class PostForm extends React.Component<IPostFormProps, IPostFormState> {    
     constructor(props: IPostFormProps) {
         super(props)
 
@@ -22,15 +27,7 @@ class PostForm extends React.Component {
         }
     }
 
-    // componentDidMount = () => {
-    //     console.log(this.props)
-    // }
-
-    // componentDidUpdate =() => {
-    //     console.log(this.props)
-    // }
-
-    submitHandler = (event: React.FormEvent<HTMLInputElement>): void => {
+    submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
 
         const { addPost } = this.props;
@@ -51,7 +48,7 @@ class PostForm extends React.Component {
         });
     }
 
-    changeInputHandler = (event: React.FormEvent<HTMLInputElement>) => { // React.FormEvent<HTMLInputElement>
+    changeInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => { // ChangeEvent - FormEvent // React.FormEvent<HTMLInputElement>
         // event.persist();
 
         const target = event.currentTarget; // event.target;
@@ -89,9 +86,9 @@ class PostForm extends React.Component {
 //     return state;
 // }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        addPost: (object) => dispatch(addPostAction(object)),
+        addPost: (object: IData) => dispatch(addPostAction(object)),
     }
 }
 

@@ -10,3 +10,8 @@ export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const ERROR_COMMENTS = 'ERROR_COMMENTS';
 export const WAIT_COMMENTS = 'WAIT_COMMENTS';
 export const REQUEST_COMMENTS = 'REQUEST_COMMENTS';
+
+// modal
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const MOVE_MODAL = 'MOVE_MODAL';
