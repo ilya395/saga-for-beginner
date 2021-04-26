@@ -5,17 +5,29 @@ import { connect } from 'react-redux';
 import { requestCommentsAction } from '../../store/actions';
 import { Spiner } from '../Spinner';
 
-interface IComments {
+type IComments = {
     title: string;
     id: number;
 }
 
-interface IFetchCommentsClass {
+// interface IComments {
+//     title: string;
+//     id: number;
+// }
+
+// interface IFetchCommentsClass {
+//     addComments: () => void,
+//     comments: IComments[], 
+//     error: boolean, 
+//     wait: boolean
+// }
+
+type IFetchCommentsClass = {
     addComments: () => void,
     comments: IComments[], 
     error: boolean, 
     wait: boolean
-}
+}    
 
 class FetchComments extends React.Component<IFetchCommentsClass> {
     constructor(props: IFetchCommentsClass) {
@@ -48,12 +60,20 @@ class FetchComments extends React.Component<IFetchCommentsClass> {
     }
 }
 
-interface IState {
+// interface IState {
+//     asyncComments: {
+//         comments: IComments[],
+//         error: boolean,
+//         wait: boolean,
+//     }
+// }
+
+type IState = {
     asyncComments: {
         comments: IComments[],
         error: boolean,
         wait: boolean,
-    }
+    }    
 }
 
 const mapStateToProps = (state: IState) => {

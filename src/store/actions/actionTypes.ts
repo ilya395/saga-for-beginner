@@ -15,3 +15,9 @@ export const REQUEST_COMMENTS = 'REQUEST_COMMENTS';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const MOVE_MODAL = 'MOVE_MODAL';
+
+// form 
+export const VALID_FORM_SUCCESS = 'VALID_FORM_SUCCESS';
+export const VALID_FORM_UNSUCCESS = 'VALID_FORM_UNSUCCESS';
+export const SAVE_FORM = 'SAVE_FORM';
+export const REQUEST_VALID_FORM = 'REQUEST_VALID_FORM';

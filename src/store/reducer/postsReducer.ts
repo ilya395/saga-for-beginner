@@ -7,7 +7,9 @@ export const initialState = {
     wait: false
 }
 
-export const postsReducer = (state = initialState, action: ICommentsOpPostsAction) =>  {
+export type InitialStateType = typeof initialState
+
+export const postsReducer = (state: InitialStateType = initialState, action: ICommentsOpPostsAction) =>  {
 
     switch (action.type) {
         case ERROR_DOWNLOAD_POSTS:

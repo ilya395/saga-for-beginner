@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../store/actions';
+import { closeModal, requestValidForm } from '../../store/actions';
 import { BigForm } from '../BigForm';
+import ReduxForm from '../ReduxForm';
 import './Widget.css';
 
 const Widget = () => {
     const [modalClasses, setModalClasses] = useState('modal fade');
     const dispatch = useDispatch();
     const status = useSelector((state: {modal: {modal: boolean}}) => state.modal.modal);
+    const formType = useSelector((state: {app: {formType: string}}) => state.app.formType);
 
     useEffect(() => {
         status 
@@ -19,7 +21,15 @@ const Widget = () => {
         dispatch(closeModal());
     }
 
-    const savePlz = () => {}
+    const savePlz = (values: any) => {
+        dispatch(requestValidForm());
+        console.log(values)
+    }
+
+    const submitPlz = (values: any) => {
+        console.log(values)
+        dispatch(requestValidForm());
+    }
     
     return (
         <div className={modalClasses} tabIndex={-1} role="dialog">
@@ -32,12 +42,16 @@ const Widget = () => {
                 </button>
                 </div>
                 <div className="modal-body">
-                <BigForm />
+                    {
+                        formType === 'custom'
+                            ? <BigForm />
+                            : <ReduxForm onSubmit={submitPlz} />
+                    }
                 </div>
-                <div className="modal-footer">
-                <button type="button" className="btn btn-primary">Save changes</button>
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={closePlz}>Close</button>
-                </div>
+                {/* <div className="modal-footer">
+                    <button type="submit" className="btn btn-primary" onClick={savePlz}>Save changes</button>
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={closePlz}>Close</button>
+                </div> */}
             </div>
             </div>
         </div>

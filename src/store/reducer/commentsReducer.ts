@@ -8,7 +8,9 @@ const initialState = {
     wait: false,
 }
 
-export const commentsReducer = (state = initialState, action: ICommentsOpPostsAction) => {
+export type IinitialStateType = typeof initialState
+
+export const commentsReducer = (state: IinitialStateType = initialState, action: ICommentsOpPostsAction) => {
     switch (action.type) {
         case ADD_COMMENTS:
             return {

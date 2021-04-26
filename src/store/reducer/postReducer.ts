@@ -18,7 +18,9 @@ const initialState = {
     ],
 }
 
-export const postReducer = (state = initialState, action: ICommentsOpPostsAction) => {
+type IinitialStateType = typeof initialState
+
+export const postReducer = (state: IinitialStateType = initialState, action: ICommentsOpPostsAction) => {
     switch (action.type) {
         case ADD_POST:
             return {

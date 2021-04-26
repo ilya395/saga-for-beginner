@@ -10,7 +10,10 @@ import {
     REQUEST_COMMENTS,
     OPEN_MODAL,
     CLOSE_MODAL,
-    MOVE_MODAL
+    MOVE_MODAL,
+    VALID_FORM_SUCCESS,
+    VALID_FORM_UNSUCCESS,
+    REQUEST_VALID_FORM
 } from './actionTypes';
 // import { URL_TO_DB } from '../../constants';
 import { Dispatch } from 'redux';
@@ -110,5 +113,32 @@ export const moveModal = () => {
         setTimeout(() => {
             dispatch(openModal());
         }, 5000);
+    }
+}
+
+//
+export type ValidFormSuccessActionType = () => {
+    type: typeof VALID_FORM_SUCCESS
+}
+
+export const validFormSuccess: ValidFormSuccessActionType = () => {
+    return {
+        type: VALID_FORM_SUCCESS
+    }
+}
+
+export type ValidFormUnSuccessActionType = () => {
+    type: typeof VALID_FORM_UNSUCCESS
+}
+
+export const validFormUnSuccess: ValidFormUnSuccessActionType = () => {
+    return {
+        type: VALID_FORM_UNSUCCESS
+    }
+}
+
+export const requestValidForm = () => {
+    return {
+        type: REQUEST_VALID_FORM
     }
 }

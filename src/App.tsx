@@ -42,12 +42,9 @@ function App(props: IAppProps) {
 
   const { wait } = asyncPosts;
 
-  console.log(props);
-
   // const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('!')
     const { openModalPlz } = props;
     openModalPlz();
   }, []);
@@ -55,13 +52,11 @@ function App(props: IAppProps) {
   return (
     <div className="container pt-3">
 
-      {/* {
+      {
         props.modal.modal === true 
           ? <Widget />
           : <></>
-      } */}
-
-      <Widget />
+      }
 
       <div className="row">
         <div className="col pb-3">
