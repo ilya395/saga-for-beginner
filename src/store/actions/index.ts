@@ -13,7 +13,12 @@ import {
     MOVE_MODAL,
     VALID_FORM_SUCCESS,
     VALID_FORM_UNSUCCESS,
-    REQUEST_VALID_FORM
+    REQUEST_VALID_FORM,
+    START_DiSPATCH_FORM_DATA,
+    WAITING_DiSPATCH_FORM_DATA,
+    SUCCESS_DiSPATCH_FORM_DATA,
+    ERROR_DiSPATCH_FORM_DATA,
+    DiSPATCH_FORM_DATA
 } from './actionTypes';
 // import { URL_TO_DB } from '../../constants';
 import { Dispatch } from 'redux';
@@ -29,7 +34,7 @@ export const addPostAction = (payload: object) => {
 }
 
 // posts
-export const addPostsAction = (payload: object[]) => {
+export const addPostsAction = (payload: Array<object>) => {
     return {
         type: ADD_POSTS,
         payload,
@@ -55,7 +60,7 @@ export const requestPostsAction = () => {
 }
 
 // comments
-export const addCommentsAction = (payload: object[]) => {
+export const addCommentsAction = (payload: Array<object>) => {
     return {
         type: ADD_COMMENTS,
         payload
@@ -140,5 +145,55 @@ export const validFormUnSuccess: ValidFormUnSuccessActionType = () => {
 export const requestValidForm = () => {
     return {
         type: REQUEST_VALID_FORM
+    }
+}
+
+// 
+type DispatchFormDataActionType = {
+    type: typeof DiSPATCH_FORM_DATA
+    payload: string
+}
+export const dispatchFormData: (payload: string) => DispatchFormDataActionType = (payload: string) => {
+    return {
+        type: DiSPATCH_FORM_DATA,
+        payload
+    }
+}
+
+type StartDispatchFormDataActionType = {
+    type: typeof START_DiSPATCH_FORM_DATA,
+    payload: object
+}
+export const startDispatchFormData: (payload: object) => StartDispatchFormDataActionType = (payload) => {
+    return {
+        type: START_DiSPATCH_FORM_DATA,
+        payload
+    }
+}
+
+type WaitingDispatchFormDataActionType = {
+    type: typeof WAITING_DiSPATCH_FORM_DATA
+}
+export const waitingDispatchFormData: () => WaitingDispatchFormDataActionType = () => {
+    return {
+        type: WAITING_DiSPATCH_FORM_DATA
+    }
+}
+
+type SuccessDispatchFormDataActionType = () => {
+    type: typeof SUCCESS_DiSPATCH_FORM_DATA
+}
+export const successDispatchFormData: SuccessDispatchFormDataActionType = () => {
+    return {
+        type: SUCCESS_DiSPATCH_FORM_DATA
+    }
+}
+
+type ErrorDispatchFormDataActionType = () => {
+    type: typeof ERROR_DiSPATCH_FORM_DATA
+}
+export const errorDispatchFormData: ErrorDispatchFormDataActionType = () => {
+    return {
+        type: ERROR_DiSPATCH_FORM_DATA
     }
 }

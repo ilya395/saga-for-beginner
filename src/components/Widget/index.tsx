@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, requestValidForm } from '../../store/actions';
+import { closeModal, dispatchFormData, requestValidForm } from '../../store/actions';
 import { BigForm } from '../BigForm';
 import ReduxForm from '../ReduxForm';
 import './Widget.css';
@@ -27,8 +27,17 @@ const Widget = () => {
     }
 
     const submitPlz = (values: any) => {
-        console.log(values)
-        dispatch(requestValidForm());
+        // console.log(values)
+        // let result = '?';
+        // let count = 0;
+        // for (let i in values) {
+        //     result += count === 0 ? `${i}=${values[i]}` : `&${i}=${values[i]}`;
+        //     count += 1;
+        // }
+        // console.log(result)
+        // dispatch(requestValidForm());
+        // диспатчим отправку данных на бэк
+        dispatch(dispatchFormData(values));
     }
     
     return (

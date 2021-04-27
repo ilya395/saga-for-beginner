@@ -6,6 +6,7 @@ import { modalReducer } from './modalReducer';
 import { BigFormReducer } from './bigFormReducer';
 import { appReducer } from './appReducer';
 import { reducer as formReducer } from 'redux-form';
+import { formDataDispatchReducer } from './formDataDispatchReducer';
 
 export const rootReducer = combineReducers({
     syncPosts: postReducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     bigForm: BigFormReducer,
     app: appReducer,
     form: formReducer,
+    dispatchFormData: formDataDispatchReducer
 });
 
 export type RootReducerType = typeof rootReducer

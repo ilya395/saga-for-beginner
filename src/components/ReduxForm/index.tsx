@@ -1,6 +1,22 @@
 import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+type WaitingDispatchDataType = {
+    dispatchFormData: {
+        waitingDispatch: boolean | null
+    }
+}
+type SuccessDispatchDataType = {
+    dispatchFormData: {
+        successDispatch: boolean | null
+    }    
+}
+type ErrorDispatchDataType = {
+    dispatchFormData: {
+        errorDispatch: boolean | null
+    }      
+}
+
 type PropsType = {
     handleSubmit: (foo: any) => void
 }
@@ -91,6 +107,10 @@ const CustomReduxForm: React.FC<PropsType> = (props) => {
     //     startValidForm && handleSubmit(submitForm);
     // }, [startValidForm]);
 
+    const waitingDispatch = useSelector<WaitingDispatchDataType>(state => state.dispatchFormData.waitingDispatch);
+    const successDispatch = useSelector<SuccessDispatchDataType>(state => state.dispatchFormData.successDispatch);
+    const errorDispatch = useSelector<ErrorDispatchDataType>(state => state.dispatchFormData.errorDispatch);
+    console.log(waitingDispatch, successDispatch, errorDispatch)
     return (
         <form onSubmit={handleSubmit}>
             <Field
@@ -185,6 +205,15 @@ const CustomReduxForm: React.FC<PropsType> = (props) => {
                 </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
+            {
+                waitingDispatch && <p><span>Отпраляем...</span></p>
+            }
+            {
+                successDispatch && <p><span>Отправлено!</span></p>
+            }
+            {
+                errorDispatch && <p><span>Не получилось отправить...</span></p>
+            }
         </form>
     );
 }

@@ -3,7 +3,7 @@ import Posts from './components/Posts';
 import FetchedPosts from './components/FetchedPosts';
 import FetchComments from './components/FetchComments';
 
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Widget from './components/Widget';
 import { useEffect } from 'react';
 import { moveModal, openModal } from './store/actions';
@@ -43,6 +43,8 @@ function App(props: IAppProps) {
   const { wait } = asyncPosts;
 
   // const dispatch = useDispatch();
+  const dispatchFormData = useSelector((state: any) => state.dispatchFormData);
+  // console.log(dispatchFormData)
 
   useEffect(() => {
     const { openModalPlz } = props;
