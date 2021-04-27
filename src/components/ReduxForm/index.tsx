@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
@@ -7,44 +6,80 @@ type PropsType = {
 }
 
 type RenderFieldType = {
-    input: any
+    input: object
     id: string
     placeholder: string
     label: string
     type: string
     meta: {
-        touched: any 
-        error: any
-        warning: any
-    }
+        touched: boolean 
+        error: undefined | string
+        warning?: any
+    },
+    className: string
 }
 
-const validateEmail = (value: string) => value && (value == '')// !/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(value)
-    ? 'Ahtung!'
-    : undefined
+const validateEmail = (value: string) => {
+    if (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i.test(value)) {
+        return undefined
+    }
+    return "Ошибка в email'e"
+}
 
-const required = (value: any) => value ? undefined : "Обязательное поле";
+const required = (value: string) => {
+    console.log(value, !!value)
+    if (!!value) {
+        return undefined
+    } 
+    return "Обязательное поле"
+} 
 
-const renderField = ({ input, id, placeholder, label, type, meta: { touched, error, warning } }: RenderFieldType) => (
-    <div className="form-group">
-        <label htmlFor={id}>{label}</label>
-        <input
-            type={type} 
-            className="form-control"
-            id={id}
-            placeholder={placeholder}
-            {...input}
-        />
-        {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
-    </div>
-  )
+const renderField = ({ input, id, placeholder, label, type, className, meta: { touched, error, warning } }: RenderFieldType) => {
+    // console.log(input)
+    return (
+        <div className="form-group">
+            <label htmlFor={id}>{label}</label>
+            <input
+                type={type} 
+                className={`${className} ${(touched && error) ? 'is-invalid' : ''}`}
+                placeholder={placeholder ? placeholder : ''}
+                {...input}
+                data-custom-error={error}
+                data-custom-touched={touched}
+            />
+            {
+                touched && (error && <span className="is-invalid" style={{color: '#dc3545'}}>{error}</span>)
+            }
+        </div>
+    )
+}
+
+const renderFieldFoecheckBox = ({ input, id, placeholder, label, type, className, meta: { touched, error, warning } }: RenderFieldType) => {
+    // console.log(input)
+    return (
+        <div className="form-group">
+            <div className="form-check">
+                <input
+                    type={type} 
+                    className={`${className} ${(touched && error) ? 'is-invalid' : ''}`}
+                    placeholder={placeholder ? placeholder : ''}
+                    {...input}
+                    data-custom-error={error}
+                    data-custom-touched={touched}
+                />
+                <label className="form-check-label" htmlFor={id}>{label}</label>
+                {
+                    touched && (error && <><br /><span className="is-invalid" style={{color: '#dc3545'}}>{error}</span></>)
+                }
+            </div>
+        </div>
+    )
+}
 
 const CustomReduxForm: React.FC<PropsType> = (props) => {
     const { handleSubmit } = props;
 
-    const startValidForm = useSelector((state: {bigForm: {requestValid: boolean}}) => state.bigForm.requestValid);
+    // const startValidForm = useSelector((state: {bigForm: {requestValid: boolean}}) => state.bigForm.requestValid);
 
     // const submitForm = (values: any) => {
     //     // event.preventDefault();
@@ -58,27 +93,6 @@ const CustomReduxForm: React.FC<PropsType> = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* <Field
-                type="tel" 
-                className={`form-control`} 
-                id="exampleFormControlInput_tel" 
-                placeholder={'+7'}
-                name="phone"
-                component={renderField}
-                // validate={[validateEmail,]}
-            /> */}
-            {/* <div className="form-group">
-                <label htmlFor="exampleFormControlInput1">Email address</label>
-                <Field 
-                    type="email" 
-                    className={`form-control`} 
-                    id="exampleFormControlInput1" 
-                    placeholder={'Иван@gmcs.ru'}
-                    name="email"
-                    component="input"
-                    
-                />
-            </div> */}
             <Field
                 type="email" 
                 className={`form-control`} 
@@ -121,9 +135,6 @@ const CustomReduxForm: React.FC<PropsType> = (props) => {
                     <option value={3}>3</option>
                     <option value={4}>4</option>
                     <option value={5}>5</option>
-                    {/* {
-                        ['1', '2', '3', '4', '5'].map((item, index) => <option value={item} key={index}>{item}</option>)
-                    } */}
                 </Field>
             </div>
             <div className="form-group">
@@ -138,20 +149,17 @@ const CustomReduxForm: React.FC<PropsType> = (props) => {
                     name="text-area"
                 />
             </div>
-            <div className="form-group">
-                <div className="form-check">
-                    <Field
-                        className="form-check-input" 
-                        type="checkbox" 
-                        id="defaultCheck1"
-                        component="input"
-                        name="check-box"
-                    />
-                    <label className="form-check-label" htmlFor="defaultCheck1">
-                        Default checkbox
-                    </label>
-                </div>    
-            </div>
+            
+            <Field
+                className="form-check-input" 
+                type="checkbox" 
+                id="defaultCheck1"
+                // component="input"
+                name="check-box"
+                component={renderFieldFoecheckBox}
+                label="Default checkbox"
+                validate={[required,]}
+            />
             <div className="form-group">
                 <div className="form-check form-check-inline">
                     <Field 
